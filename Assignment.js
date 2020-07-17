@@ -27,7 +27,7 @@ function display(stack) {
 // display(starTrek);
 
 function is_palindrome(s) {
-  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   let stack = new Stack;
   let stack2 = new Stack;
   s.split('').forEach(char => stack.push(char));
@@ -129,10 +129,38 @@ function displayQ(queue) {
 // First in queue is Kirk
 
 ////8
+class stackQueue {
+  constructor() {
+    this.queue = new Stack;
+    this.last = new Stack;
+  }
 
+  enqueue(data) {
+    const node = new _Node(data, null);
+    if (this.queue.top === null) {
+      this.queue.top = node;
+    }
+    if (this.last.top !== null) {
+      this.last.top.next = node;
+    }
+    this.last.next = node;
+  }
+
+  dequeue() {
+    if (this.queue.top === null) {
+      return;
+    }
+    const node = this.queue.top;
+    this.queue.top = this.queue.top.next;
+    if (node === this.last.top) {
+      this.last.top = null;
+    }
+    return node.data;
+  }
+}
 
 ////9
-dancers = ['F Jane', 'M Frank', 'M John', 'M Sherlock', 'F Madonna', 'M David', 'M Christopher', 'F Beyonce'];
+const dancers = ['F Jane', 'M Frank', 'M John', 'M Sherlock', 'F Madonna', 'M David', 'M Christopher', 'F Beyonce'];
 
 function dancePairing(array) {
   let men = new Queue;
@@ -182,4 +210,4 @@ function ophidianBank(arr) {
   }
 }
 
-// ophidianBank(customers);
+ophidianBank(customers);
